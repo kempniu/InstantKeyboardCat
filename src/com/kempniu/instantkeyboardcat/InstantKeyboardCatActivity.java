@@ -1,9 +1,15 @@
 package com.kempniu.instantkeyboardcat;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -14,12 +20,18 @@ public class InstantKeyboardCatActivity extends Activity {
 	private MediaPlayer mPlayer;
 
 	private void flipPlayback() {
+		if (mPlayer == null) {
+			mPlayer = MediaPlayer.create(getApplicationContext(), R.raw.audio);
+		}
 		if (mPlayer != null) {
 			if (mPlayer.isPlaying()) {
 				mPlayer.pause();
 			} else {
-				AudioManager mAudioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
-				mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+				SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+				if (sp.getBoolean("maximizeVolume", true)) {
+					AudioManager mAudioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+					mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+				}
 				mPlayer.seekTo(0);
 				mPlayer.start();
 			}
@@ -31,7 +43,6 @@ public class InstantKeyboardCatActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        mPlayer = MediaPlayer.create(getApplicationContext(), R.raw.audio);
         flipPlayback();
 
         ImageButton b = (ImageButton) findViewById(R.id.id_button_main);
@@ -59,5 +70,27 @@ public class InstantKeyboardCatActivity extends Activity {
     		mPlayer = null;
     	}
     }
-    
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+    	MenuInflater mi = getMenuInflater();
+		mi.inflate(R.menu.main, menu);
+		return true;
+	}
+	
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+    	switch(item.getItemId()) {
+
+    	case R.id.mb_settings:
+    		Intent settingsActivity = new Intent(getBaseContext(), InstantKeyboardCatPreferences.class);
+    		startActivity(settingsActivity);
+    		return true;
+    	
+   		default:
+   			return super.onOptionsItemSelected(item);
+   	    	   			
+    	}
+    	
+    }
+
 }
