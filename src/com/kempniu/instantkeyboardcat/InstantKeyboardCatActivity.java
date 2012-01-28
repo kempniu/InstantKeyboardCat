@@ -25,9 +25,11 @@ public class InstantKeyboardCatActivity extends Activity {
 	}
 
 	private void flipPlayback() {
+
 		if (mPlayer == null) {
 			mPlayer = MediaPlayer.create(getApplicationContext(), R.raw.audio);
 		}
+
 		if (mPlayer != null) {
 			if (mPlayer.isPlaying()) {
 				mPlayer.pause();
@@ -40,6 +42,7 @@ public class InstantKeyboardCatActivity extends Activity {
 				mPlayer.start();
 			}
 		}
+		
 	}
 
 	private void releasePlayer() {
@@ -67,12 +70,12 @@ public class InstantKeyboardCatActivity extends Activity {
         });
 
     }
-    
+
     public void onPause() {
     	super.onPause();
     	releasePlayer();
     }
-    
+
     public void onStop() {
     	super.onStop();
     	releasePlayer();
@@ -83,7 +86,7 @@ public class InstantKeyboardCatActivity extends Activity {
 		mi.inflate(R.menu.main, menu);
 		return true;
 	}
-	
+
     public boolean onOptionsItemSelected(MenuItem item) {
 
     	switch(item.getItemId()) {
@@ -92,12 +95,12 @@ public class InstantKeyboardCatActivity extends Activity {
     		Intent settingsActivity = new Intent(getBaseContext(), InstantKeyboardCatPreferences.class);
     		startActivity(settingsActivity);
     		return true;
-    	
+
    		default:
    			return super.onOptionsItemSelected(item);
-   	    	   			
+
     	}
-    	
+
     }
 
 }
