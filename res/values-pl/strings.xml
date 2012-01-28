@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Natychmiastowy Keyboard Cat!</string>
+    <string name="app_name">Keyboard Cat</string>
     <string name="mb_settings_title">Ustawienia</string>
     <string name="pref_maximize_volume_title">Maksymalizuj głośność</string>
     <string name="pref_play_on_launch_title">Odtwórz przy starcie</string>
