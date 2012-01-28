@@ -42,6 +42,13 @@ public class InstantKeyboardCatActivity extends Activity {
 		}
 	}
 
+	private void releasePlayer() {
+		if (mPlayer != null) {
+    		mPlayer.release();
+    		mPlayer = null;
+    	}
+	}
+
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -63,18 +70,12 @@ public class InstantKeyboardCatActivity extends Activity {
     
     public void onPause() {
     	super.onPause();
-    	if (mPlayer != null) {
-    		mPlayer.release();
-    		mPlayer = null;
-    	}
+    	releasePlayer();
     }
     
     public void onStop() {
     	super.onStop();
-    	if (mPlayer != null) {
-    		mPlayer.release();
-    		mPlayer = null;
-    	}
+    	releasePlayer();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
