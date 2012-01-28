@@ -19,6 +19,11 @@ public class InstantKeyboardCatActivity extends Activity {
 
 	private MediaPlayer mPlayer;
 
+	private boolean getPref(String key) {
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		return sp.getBoolean(key, true);
+	}
+
 	private void flipPlayback() {
 		if (mPlayer == null) {
 			mPlayer = MediaPlayer.create(getApplicationContext(), R.raw.audio);
@@ -27,8 +32,7 @@ public class InstantKeyboardCatActivity extends Activity {
 			if (mPlayer.isPlaying()) {
 				mPlayer.pause();
 			} else {
-				SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-				if (sp.getBoolean("maximizeVolume", true)) {
+				if (getPref("maximizeVolume")) {
 					AudioManager mAudioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
 					mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
 				}
@@ -43,7 +47,9 @@ public class InstantKeyboardCatActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        flipPlayback();
+        if (getPref("playOnLaunch")) {
+        	flipPlayback();
+        }
 
         ImageButton b = (ImageButton) findViewById(R.id.id_button_main);
 

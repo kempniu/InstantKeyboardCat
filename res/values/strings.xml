@@ -3,5 +3,6 @@
     <string name="app_name">Instant Keyboard Cat!</string>
     <string name="mb_settings_title">Settings</string>
     <string name="pref_maximize_volume_title">Maximize volume</string>
+    <string name="pref_play_on_launch_title">Play on launch</string>
 
 </resources>
