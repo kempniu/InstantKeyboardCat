@@ -47,60 +47,60 @@ public class InstantKeyboardCatActivity extends Activity {
 
 	private void releasePlayer() {
 		if (mPlayer != null) {
-    		mPlayer.release();
-    		mPlayer = null;
-    	}
+			mPlayer.release();
+			mPlayer = null;
+		}
 	}
 
-    public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
 
-        if (getPref("playOnLaunch")) {
-        	flipPlayback();
-        }
+		if (getPref("playOnLaunch")) {
+			flipPlayback();
+		}
 
-        ImageButton b = (ImageButton) findViewById(R.id.id_button_main);
+		ImageButton b = (ImageButton) findViewById(R.id.id_button_main);
 
-        b.setOnClickListener(new View.OnClickListener() {
-        	public void onClick(View v) {
-        		flipPlayback();
-        	}
-        });
+		b.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				flipPlayback();
+			}
+		});
 
-    }
+	}
 
-    public void onPause() {
-    	super.onPause();
-    	releasePlayer();
-    }
+	public void onPause() {
+		super.onPause();
+		releasePlayer();
+	}
 
-    public void onStop() {
-    	super.onStop();
-    	releasePlayer();
-    }
+	public void onStop() {
+		super.onStop();
+		releasePlayer();
+	}
 
-    public boolean onCreateOptionsMenu(Menu menu) {
-    	MenuInflater mi = getMenuInflater();
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater mi = getMenuInflater();
 		mi.inflate(R.menu.main, menu);
 		return true;
 	}
 
-    public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {
 
-    	switch(item.getItemId()) {
+		switch(item.getItemId()) {
 
-    	case R.id.mb_settings:
-    		Intent settingsActivity = new Intent(getBaseContext(), InstantKeyboardCatPreferences.class);
-    		startActivity(settingsActivity);
-    		return true;
+		case R.id.mb_settings:
+			Intent settingsActivity = new Intent(getBaseContext(), InstantKeyboardCatPreferences.class);
+			startActivity(settingsActivity);
+			return true;
 
-   		default:
-   			return super.onOptionsItemSelected(item);
+		default:
+			return super.onOptionsItemSelected(item);
 
-    	}
+		}
 
-    }
+	}
 
 }
