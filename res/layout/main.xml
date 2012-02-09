@@ -3,7 +3,7 @@
     android:id="@+id/relativeLayout1"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-
+
     <ImageButton
         android:id="@+id/id_button_main"
         android:layout_width="wrap_content"
@@ -11,6 +11,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:background="@null"
+        android:contentDescription="@string/app_name"
         android:src="@drawable/keyboard_cat_moon" />
  
  </RelativeLayout>
